@@ -1,0 +1,11 @@
+version: '2'
+services:
+  cloudflare-ddns:
+    image: oznu/cloudflare-ddns:latest
+    restart: always
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - API_KEY= your_api_key
+      - ZONE=your.domain.com
+      - PROXIED=false

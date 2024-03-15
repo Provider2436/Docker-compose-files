@@ -1,0 +1,25 @@
+version: "3"
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    devices:
+      - /dev/kvm
+    environment:
+      VERSION: "win10"
+      RAM_SIZE: "4G"
+      CPU_CORES: "4"
+      DISK_SIZE: "60G"
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    volumes:
+      - /datato/win/:/storage
+      - /storage/shared:/storage/shared
+    stop_grace_period: 2m
+    restart: on-failure
+
+#for more customizartion, go to https://github.com/dockur/windows
