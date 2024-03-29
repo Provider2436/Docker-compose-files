@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  nextcloud:
+    image: linuxserver/nextcloud
+    container_name: nextcloud
+    environment:
+      - PUID=1000 # Change this to your user/group id
+      - PGID=1000 # Change this to your group id
+      - TZ=Europe/Berlin # Change this to your timezone
+    volumes:
+      - /datato/nextcloud/config:/config
+      - /data:/data
+    depends_on:
+      - db
+      - redis
+      - onlyoffice
+    ports:
+      - 443:443
+    restart: unless-stopped
+
+  db:
+    image: postgres
+    container_name: postgres
+    environment:
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
+      - POSTGRES_PASSWORD= # Set a secure password
+    volumes:
+      - /datato/nextcloud/db:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    container_name: nextcloud_redis
+    restart: unless-stopped
+
+  onlyoffice:
+    image: onlyoffice/documentserver
+    container_name: onlyoffice
+    environment:
+      - JWT_ENABLED=true
+      - JWT_SECRET= # Set a secure JWT secret
+    ports:
+      - 9980:80
+    restart: unless-stopped
