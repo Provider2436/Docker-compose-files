@@ -1,0 +1,26 @@
+version: "3"
+services:
+  materialious:
+    image: wardpearce/materialious
+    restart: unless-stopped
+    ports:
+      - 3001:80
+    environment:
+      # No trailing backslashes!
+      # URL to your proxied Invidious instance
+      VITE_DEFAULT_INVIDIOUS_INSTANCE: "https://invidious.example.com"
+
+      # URL TO RYD
+      VITE_DEFAULT_RETURNYTDISLIKES_INSTANCE: "https://returnyoutubedislikeapi.com"
+
+      # URL to your proxied instance of Materialious
+      VITE_DEFAULT_FRONTEND_URL: "https://materialious.example.com"
+
+      # URL to Sponsorblock
+      VITE_DEFAULT_SPONSERBLOCK_INSTANCE: "https://sponsor.ajay.app"
+
+      # URL to DeArrow
+      VITE_DEFAULT_DEARROW_INSTANCE: "https://sponsor.ajay.app"
+
+      # URL to DeArrow thumbnail instance
+      VITE_DEFAULT_DEARROW_THUMBNAIL_INSTANCE: "https://dearrow-thumb.ajay.app"
