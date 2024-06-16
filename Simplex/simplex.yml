@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+
+  smp-server:
+    image: local/smp-server:latest
+    container_name: smp
+    restart: unless-stopped
+    ports:
+      - 5223:5223
+    volumes:
+      - /datato/simplex/smp/config:/etc/opt/simplex:z
+      - /datato/simplex/smp/logs:/var/opt/simplex:z
+    environment:
+      - pass=password
+      - ADDR=#ip or domain
+
+  xftp-server:
+    image: local/xftp-server:latest
+    container_name: xftp-server
+    environment:
+      - ADDR=#ip or domain
+      - QUOTA=#format in mb, gb, tb
+    ports:
+      - 443:443
+    volumes:
+      - /datato/simplex/xftp/config:/etc/opt/simplex-xftp:z
+      - /datato/simplex/xftp/logs:/var/opt/simplex-xftp:z
+      - /datato/simplex/xftp/files:/srv/xftp:z
+    restart: unless-stopped
