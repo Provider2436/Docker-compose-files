@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+    speedtest:
+        restart: unless-stopped
+        container_name: openspeedtest
+        ports:
+            - '3004:3000'
+            - '3005:3001'
+        image: openspeedtest/latest
+
+networks:
+  default:
+    external: true
+    name: net
