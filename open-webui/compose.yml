@@ -1,0 +1,19 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: always
+    #ports:
+    #  - "3000:8080"
+    environment:
+      - OLLAMA_BASE_URL=
+    volumes:
+      - ./data:/app/backend/data
+
+volumes:
+  open-webui:
+
+networks:
+  default:
+    external: true
+    name: net
